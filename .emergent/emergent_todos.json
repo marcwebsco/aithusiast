@@ -1,0 +1,34 @@
+[
+  {
+    "content": "Phase 1: Setup EMERGENT_LLM_KEY in backend .env",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: Create POC script - test AI search with Gemini 2.5 Flash + structured JSON output + hybrid fallback",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: Run POC test matrix (12 queries) until stable - 12/12 PASSED (100%)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2: Design agent - get premium futuristic design guidelines",
+    "status": "in_progress"
+  },
+  {
+    "content": "Phase 2: Build backend - models, seed 50-80 tools + 10-12 articles, API endpoints",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Build frontend - homepage, search, tool/article pages with futuristic UI",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: All user stories adhered to in development",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: End-to-end testing using testing_agent_v3",
+    "status": "pending"
+  }
+]
