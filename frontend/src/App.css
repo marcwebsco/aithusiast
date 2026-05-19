@@ -1,2 +1,2 @@
-/* AIthusiast — App-level CSS (kept minimal; design tokens live in index.css) */
-.App { min-height: 100vh; background: hsl(var(--bg)); color: hsl(var(--fg)); }
+/* AIthusiast — App-level CSS (kept minimal; tokens in index.css) */
+.App { min-height: 100vh; }

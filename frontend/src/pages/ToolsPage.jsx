@@ -39,32 +39,30 @@ export default function ToolsPage() {
   }, [category]);
 
   return (
-    <div className="container-wide py-12 lg:py-16">
-      <p className="label-eyebrow mb-3">Catalog</p>
-      <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-5">
-        {title}
-      </h1>
-      <p className="text-white/60 text-base font-light max-w-2xl">
-        Browse a curated library of the most useful AI tools. Filter by craft. Search by name.
+    <div className="container-wide py-10 lg:py-14">
+      <p className="label-eyebrow mb-2">Catalog</p>
+      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3">{title}</h1>
+      <p className="text-white/55 text-[14px] max-w-2xl">
+        Browse a curated library of the most useful AI tools. Filter by craft. Search by name or use case.
       </p>
 
-      <div className="mt-10">
-        <HeroSearch size="compact" />
+      <div className="mt-8">
+        <HeroSearch size="compact" showChips={false} />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <CategoryPills value={category} onChange={onCategory} dataTestid="tools-category-pill" />
       </div>
 
-      <div className="mt-10" data-testid="tools-results-grid">
+      <div className="mt-8" data-testid="tools-results-grid">
         {loading ? (
-          <div className="flex items-center gap-2 text-white/60">
-            <Loader2 className="h-4 w-4 animate-spin" /> Loading…
+          <div className="flex items-center gap-2 text-white/60 text-[13px]">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading…
           </div>
         ) : tools.length === 0 ? (
-          <p className="text-white/60">No tools match your filters.</p>
+          <p className="text-white/60 text-[14px]">No tools match your filters.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             {tools.map((t) => (
               <ToolCard key={t.id} tool={t} />
             ))}

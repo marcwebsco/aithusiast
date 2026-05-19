@@ -12,21 +12,21 @@ export default function StacksPage() {
   }, []);
 
   return (
-    <div className="container-wide py-12 lg:py-16">
-      <p className="label-eyebrow mb-3">Curated stacks</p>
-      <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-4">
+    <div className="container-wide py-10 lg:py-14">
+      <p className="label-eyebrow mb-2">Curated stacks</p>
+      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3">
         Adopt a workflow, not just a tool.
       </h1>
-      <p className="text-white/60 text-base font-light max-w-2xl">
-        Hand-picked combinations of AI tools that work beautifully together for a specific kind of person.
+      <p className="text-white/55 text-[14px] max-w-2xl">
+        Hand-picked combinations of AI tools that work beautifully together for a specific persona.
       </p>
-      <div className="mt-12">
+      <div className="mt-10">
         {loading ? (
-          <div className="flex items-center gap-2 text-white/60">
-            <Loader2 className="h-4 w-4 animate-spin" /> Loading…
+          <div className="flex items-center gap-2 text-white/60 text-[13px]">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading…
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             {stacks.map((s) => (
               <StackCard key={s.id} stack={s} />
             ))}

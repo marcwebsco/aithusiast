@@ -69,6 +69,9 @@ class Tool(BaseModel):
     accent: str = "#A855F7"
     trending: bool = False
     featured: bool = False
+    rank: Optional[int] = None
+    weekly_growth: str = ""
+    popularity: int = 0
 
 
 class Article(BaseModel):
@@ -127,6 +130,19 @@ async def seed_if_empty():
     if tools_count == 0:
         logger.info("Seeding tools…")
         await db.tools.insert_many([{"_id": t["id"], **t} for t in TOOLS_SEED])
+    else:
+        # Upsert refreshable fields (rank, weekly_growth, popularity, trending, featured)
+        # so existing installs pick up phase-3 ranking data.
+        for t in TOOLS_SEED:
+            update = {
+                "rank": t.get("rank"),
+                "weekly_growth": t.get("weekly_growth", ""),
+                "popularity": t.get("popularity", 0),
+                "trending": t.get("trending", False),
+                "featured": t.get("featured", False),
+                "accent": t.get("accent", "#A855F7"),
+            }
+            await db.tools.update_one({"id": t["id"]}, {"$set": update})
     articles_count = await db.articles.count_documents({})
     if articles_count == 0:
         logger.info("Seeding articles…")
@@ -360,6 +376,15 @@ async def list_tools(
             {"tags": regex},
         ]
     docs = await db.tools.find(query, {"_id": 0}).limit(limit).to_list(limit)
+    return docs
+
+
+@api.get("/tools/ranking", response_model=List[Tool])
+async def tools_ranking(limit: int = Query(10, ge=1, le=30)):
+    """Top trending AI tools ordered by rank."""
+    docs = await db.tools.find(
+        {"rank": {"$ne": None}}, {"_id": 0}
+    ).sort("rank", 1).limit(limit).to_list(limit)
     return docs
 
 

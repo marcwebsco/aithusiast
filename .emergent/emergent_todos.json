@@ -1,34 +1,38 @@
 [
   {
-    "content": "Phase 1: Setup EMERGENT_LLM_KEY in backend .env",
+    "content": "Phase 3: Update color system - atmospheric dark grays (#0D0D12), reduce glow intensity, less glass everywhere",
     "status": "completed"
   },
   {
-    "content": "Phase 1: Create POC script - test AI search with Gemini 2.5 Flash + structured JSON output + hybrid fallback",
+    "content": "Phase 3: Backend - add rank/weekly_growth/popularity fields + /api/tools/ranking endpoint for trending ranking",
     "status": "completed"
   },
   {
-    "content": "Phase 1: Run POC test matrix (12 queries) until stable - 12/12 PASSED (100%)",
+    "content": "Phase 3: Redesign HomePage - minimal hero, giant search, categories, TRENDING RANKING (numbered), recommendations, brief articles, footer",
     "status": "completed"
   },
   {
-    "content": "Phase 2: Design agent - get premium futuristic design guidelines",
+    "content": "Phase 3: New TrendingRanking component (numbered 1-10 with growth indicators)",
     "status": "completed"
   },
   {
-    "content": "Phase 2: Build backend - models, seed 50-80 tools + 10-12 articles, API endpoints",
+    "content": "Phase 3: Simplify ToolCard - less glow, less visual overload, more concise",
     "status": "completed"
   },
   {
-    "content": "Phase 2: Build frontend - homepage, search, tool/article pages with futuristic UI",
+    "content": "Phase 3: Refine HeroSearch - cleaner, still hero but reduced glow intensity",
     "status": "completed"
   },
   {
-    "content": "Phase 2: All user stories adhered to in development",
+    "content": "Phase 3: Refine SiteShell header, footer - cleaner premium feel",
     "status": "completed"
   },
   {
-    "content": "Phase 2: End-to-end testing using testing_agent_v3 - 100% PASSED (Backend 17/17, Frontend all flows)",
+    "content": "Phase 3: Update Tools / Articles / Stacks / Search pages to match new restrained aesthetic",
     "status": "completed"
+  },
+  {
+    "content": "Phase 3: End-to-end testing using testing_agent_v3",
+    "status": "in_progress"
   }
 ]

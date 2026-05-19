@@ -136,8 +136,41 @@ class AIthusiastAPITester:
             print(f"   Coding tools: {len(response)}")
         return success
 
+    def test_tools_ranking(self):
+        """Test NEW Phase 3 endpoint: /api/tools/ranking - top 10 trending tools"""
+        success, response = self.run_test(
+            "Tools Ranking (NEW Phase 3)",
+            "GET",
+            "/tools/ranking",
+            200,
+            params={"limit": 10}
+        )
+        if success:
+            if isinstance(response, list):
+                print(f"   Ranking tools count: {len(response)}")
+                if len(response) == 10:
+                    print(f"   ✓ Returns exactly 10 trending tools")
+                    # Verify ranking order and fields
+                    for i, tool in enumerate(response):
+                        rank = tool.get('rank')
+                        name = tool.get('name', 'N/A')
+                        growth = tool.get('weekly_growth', '')
+                        popularity = tool.get('popularity', 0)
+                        if i == 0:
+                            print(f"   #1: {name} (rank={rank}, growth={growth}, popularity={popularity})")
+                        if rank != i + 1:
+                            print(f"   ⚠ Rank mismatch at position {i+1}: expected rank={i+1}, got rank={rank}")
+                    # Check top 3 tools
+                    if len(response) >= 3:
+                        print(f"   Top 3: {response[0].get('name')}, {response[1].get('name')}, {response[2].get('name')}")
+                else:
+                    print(f"   ⚠ Expected 10 tools, got {len(response)}")
+            else:
+                print(f"   ⚠ Response is not a list")
+        return success
+
     def test_tool_detail(self):
-        """Test tool detail page"""
+        """Test tool detail page - Phase 3: should include rank, weekly_growth, popularity for trending tools"""
         success, response = self.run_test(
             "Tool Detail (chatgpt)",
             "GET",
@@ -146,6 +179,14 @@ class AIthusiastAPITester:
         )
         if success:
             print(f"   Tool name: {response.get('name', 'N/A')}")
+            # Phase 3: Check for new trending fields
+            rank = response.get('rank')
+            growth = response.get('weekly_growth', '')
+            popularity = response.get('popularity', 0)
+            if rank:
+                print(f"   ✓ Phase 3 fields: rank={rank}, growth={growth}, popularity={popularity}")
+            else:
+                print(f"   ℹ Not a trending tool (no rank)")
         return success
 
     def test_tool_detail_midjourney(self):
@@ -353,6 +394,7 @@ def main():
     print("TOOLS ENDPOINTS")
     print("=" * 70)
     tester.test_tools_list()
+    tester.test_tools_ranking()  # NEW Phase 3 endpoint
     tester.test_tools_trending()
     tester.test_tools_by_category()
     tester.test_tool_detail()

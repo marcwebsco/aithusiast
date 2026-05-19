@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { apiGet, formatCategory } from "@/lib/api";
-import { ArrowLeft, ArrowUpRight, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Loader2, Sparkles, TrendingUp } from "lucide-react";
 import ToolCard from "@/components/site/ToolCard";
 
 export default function ToolDetailPage() {
@@ -23,8 +23,8 @@ export default function ToolDetailPage() {
 
   if (loading) {
     return (
-      <div className="container-wide py-20 flex items-center gap-2 text-white/60">
-        <Loader2 className="h-4 w-4 animate-spin" /> Loading tool…
+      <div className="container-wide py-20 flex items-center gap-2 text-white/60 text-[13px]">
+        <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading tool…
       </div>
     );
   }
@@ -38,33 +38,33 @@ export default function ToolDetailPage() {
   }
 
   return (
-    <div className="container-wide py-12 lg:py-16">
-      <Link to="/tools" className="btn-ghost text-xs mb-8">
+    <div className="container-wide py-10 lg:py-14">
+      <Link to="/tools" className="btn-ghost text-[12px] mb-6">
         <ArrowLeft className="h-3.5 w-3.5" /> All tools
       </Link>
 
-      {/* Hero card */}
-      <div
-        data-testid="tool-detail-hero"
-        className="relative overflow-hidden rounded-[44px] border border-white/[0.10] bg-white/[0.04] backdrop-blur-xl p-8 lg:p-12"
-        style={{ boxShadow: "var(--shadow-elev)" }}
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-32 -right-32 h-[420px] w-[420px] rounded-full blur-3xl opacity-50"
-          style={{ background: `radial-gradient(closest-side, ${tool.accent}55, transparent 65%)` }}
-        />
-        <div className="relative flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-10">
+      {/* Hero */}
+      <div data-testid="tool-detail-hero" className="surface-card relative rounded-2xl p-6 lg:p-10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-8">
           <div
-            className="h-20 w-20 rounded-3xl border border-white/15 bg-white/[0.06] flex items-center justify-center font-display text-3xl"
-            style={{ boxShadow: `inset 0 0 40px ${tool.accent}33` }}
+            className="h-16 w-16 rounded-2xl border border-white/10 flex items-center justify-center font-display text-2xl flex-shrink-0"
+            style={{ background: `${tool.accent}1F` }}
           >
             {tool.name?.[0]}
           </div>
-          <div className="flex-1">
-            <p className="label-eyebrow mb-2">{formatCategory(tool.category)} · {tool.pricing}</p>
-            <h1 className="font-display text-5xl sm:text-6xl tracking-tight">{tool.name}</h1>
-            <p className="mt-3 text-white/70 text-lg font-light max-w-2xl leading-relaxed">{tool.tagline}</p>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="badge-tag">{formatCategory(tool.category)}</span>
+              <span className="badge-tag capitalize">{tool.pricing}</span>
+              {tool.rank && (
+                <span className="badge-tag !text-[#A855F7] !border-[#A855F7]/30 !bg-[#A855F7]/[0.08]">#{tool.rank} trending</span>
+              )}
+              {tool.weekly_growth && (
+                <span className="badge-growth"><TrendingUp className="h-3 w-3" /> {tool.weekly_growth}</span>
+              )}
+            </div>
+            <h1 className="font-display text-4xl sm:text-5xl tracking-tight">{tool.name}</h1>
+            <p className="mt-2 text-white/65 text-[16px] max-w-2xl leading-relaxed">{tool.tagline}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <a
@@ -77,30 +77,28 @@ export default function ToolDetailPage() {
               <ArrowUpRight className="h-4 w-4" /> Visit
             </a>
             <Link to={`/search?q=${encodeURIComponent("alternatives to " + tool.name)}`} className="btn-ghost">
-              <Sparkles className="h-4 w-4" /> Find alternatives
+              <Sparkles className="h-3.5 w-3.5" /> Find alternatives
             </Link>
           </div>
         </div>
       </div>
 
       {/* Content grid */}
-      <div className="mt-12 grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          <section
-            className="glass-card rounded-[32px] p-8"
-          >
+      <div className="mt-8 grid lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 space-y-4">
+          <section className="surface-card rounded-2xl p-6">
             <p className="label-eyebrow mb-3">Overview</p>
-            <p className="text-white/80 text-base leading-relaxed font-light">{tool.description}</p>
+            <p className="text-white/80 text-[15px] leading-relaxed">{tool.description}</p>
           </section>
 
           {tool.strengths?.length > 0 && (
-            <section className="glass-card rounded-[32px] p-8">
-              <p className="label-eyebrow mb-4">Strengths</p>
-              <ul className="grid sm:grid-cols-2 gap-3">
+            <section className="surface-card rounded-2xl p-6">
+              <p className="label-eyebrow mb-3">Strengths</p>
+              <ul className="grid sm:grid-cols-2 gap-2.5">
                 {tool.strengths.map((s) => (
-                  <li key={s} className="flex items-start gap-3">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#A855F7] shadow-[0_0_10px_#A855F7] flex-shrink-0" />
-                    <span className="text-white/85 text-sm leading-relaxed">{s}</span>
+                  <li key={s} className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1 w-1 rounded-full bg-[#A855F7] flex-shrink-0" />
+                    <span className="text-white/80 text-[14px] leading-relaxed">{s}</span>
                   </li>
                 ))}
               </ul>
@@ -108,26 +106,41 @@ export default function ToolDetailPage() {
           )}
         </div>
 
-        <aside className="space-y-6">
-          <section className="glass-card rounded-[32px] p-6">
+        <aside className="space-y-4">
+          <section className="surface-card rounded-2xl p-5">
             <p className="label-eyebrow mb-3">Quick facts</p>
-            <dl className="space-y-3 text-sm">
+            <dl className="space-y-2.5 text-[13px]">
               <div className="flex justify-between">
-                <dt className="text-white/50">Category</dt>
+                <dt className="text-white/45">Category</dt>
                 <dd className="text-white">{formatCategory(tool.category)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-white/50">Pricing</dt>
+                <dt className="text-white/45">Pricing</dt>
                 <dd className="text-white capitalize">{tool.pricing}</dd>
               </div>
-              <div className="flex justify-between">
-                <dt className="text-white/50">Trending</dt>
-                <dd className="text-white">{tool.trending ? "Yes" : "—"}</dd>
-              </div>
+              {tool.rank && (
+                <div className="flex justify-between">
+                  <dt className="text-white/45">Trending rank</dt>
+                  <dd className="text-white tabular">#{tool.rank}</dd>
+                </div>
+              )}
+              {tool.weekly_growth && (
+                <div className="flex justify-between">
+                  <dt className="text-white/45">Weekly growth</dt>
+                  <dd className="text-emerald-300 tabular">{tool.weekly_growth}</dd>
+                </div>
+              )}
+              {tool.popularity > 0 && (
+                <div className="flex justify-between">
+                  <dt className="text-white/45">Popularity</dt>
+                  <dd className="text-white tabular">{tool.popularity}/100</dd>
+                </div>
+              )}
             </dl>
           </section>
+
           {tool.tags?.length > 0 && (
-            <section className="glass-card rounded-[32px] p-6">
+            <section className="surface-card rounded-2xl p-5">
               <p className="label-eyebrow mb-3">Tags</p>
               <div className="flex flex-wrap gap-1.5">
                 {tool.tags.map((t) => (
@@ -141,10 +154,10 @@ export default function ToolDetailPage() {
 
       {/* Similar */}
       {similar.length > 0 && (
-        <section className="mt-16">
-          <p className="label-eyebrow mb-4">Similar tools</p>
-          <h2 className="font-display text-3xl tracking-tight mb-8">More in {formatCategory(tool.category)}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        <section className="mt-12">
+          <p className="label-eyebrow mb-2">Similar tools</p>
+          <h2 className="font-display text-2xl lg:text-3xl tracking-tight mb-5">More in {formatCategory(tool.category)}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             {similar.slice(0, 6).map((t) => (
               <ToolCard key={t.id} tool={t} />
             ))}

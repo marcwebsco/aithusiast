@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Sparkles, Command as CommandIcon, Loader2 } from "lucide-react";
-import { apiGet, apiPost, formatCategory, CATEGORY_ORDER } from "@/lib/api";
-import ToolCard from "@/components/site/ToolCard";
+import { ArrowRight, Sparkles, Loader2 } from "lucide-react";
+import { apiGet, formatCategory, CATEGORY_ORDER } from "@/lib/api";
 
-export default function HeroSearch({ size = "hero" }) {
+export default function HeroSearch({ size = "hero", showCategories = false, showChips = true }) {
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const [query, setQuery] = useState("");
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [preview, setPreview] = useState(null);
-  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     apiGet("/suggestions").then((d) => setPrompts(d.prompts || [])).catch(() => {});
@@ -28,36 +25,30 @@ export default function HeroSearch({ size = "hero" }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const runQuickPreview = async (q) => {
-    if (!q.trim()) return;
-    setLoading(true);
-    setShowPreview(true);
-    try {
-      const res = await apiPost("/search", { query: q });
-      setPreview(res);
-    } catch (e) {
-      setPreview(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const submit = (q) => {
     const final = (q ?? query).trim();
     if (!final) return;
+    setLoading(true);
     navigate(`/search?q=${encodeURIComponent(final)}`);
   };
 
-  const onChip = (p) => {
-    setQuery(p);
-    submit(p);
-  };
+  const isHero = size === "hero";
+  const shellClass = isHero
+    ? "rounded-[40px] p-2.5"
+    : "rounded-[32px] p-2";
 
   return (
     <div data-testid="hero-ai-search" className="relative">
-      {/* Glass shell */}
-      <div className="relative reflect-sweep rounded-[52px] p-4 sm:p-5 lg:p-6 bg-white/[0.05] border border-white/[0.12] backdrop-blur-2xl shadow-[var(--shadow-glow-md)] anim-pulse-glow">
-        <div className="flex items-center gap-3 px-4 py-3 sm:py-4 rounded-full bg-black/30 border border-white/[0.10] focus-within:border-white/[0.22] focus-within:shadow-[var(--shadow-glow-sm)] transition-[border-color,box-shadow] duration-300">
+      {isHero && (
+        <div aria-hidden className="pointer-events-none absolute -inset-8 -z-10">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-72 w-[640px] orb-soft rounded-full" />
+        </div>
+      )}
+
+      <div className={`glass-panel reflect-sweep ${shellClass}`}>
+        <div
+          className={`flex items-center gap-2 px-4 ${isHero ? "py-4 sm:py-5" : "py-3"} rounded-full bg-black/30 border border-white/[0.06] focus-within:border-[#A855F7]/30 transition-colors duration-200`}
+        >
           <Sparkles className="h-5 w-5 text-[#A855F7] flex-shrink-0" />
           <input
             ref={inputRef}
@@ -66,97 +57,58 @@ export default function HeroSearch({ size = "hero" }) {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") submit();
-              if (e.key === "Tab" && !e.shiftKey && query.trim()) {
-                e.preventDefault();
-                runQuickPreview(query);
-              }
             }}
-            placeholder="Find the perfect AI for anything…  e.g. ‘AI for cinematic images’"
-            className="flex-1 bg-transparent outline-none text-white placeholder:text-white/40 text-base sm:text-lg font-light"
+            placeholder={isHero ? "What AI do you need?" : "Search AI tools, use cases, categories…"}
+            className={`flex-1 bg-transparent outline-none text-white placeholder:text-white/35 ${
+              isHero ? "text-[17px] sm:text-[19px]" : "text-[15px]"
+            } font-normal`}
             autoComplete="off"
           />
-          {loading && <Loader2 className="h-5 w-5 text-white/60 animate-spin" />}
-          <kbd className="hidden md:inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] text-white/40 border border-white/10 rounded px-1.5 py-0.5">
-            <CommandIcon className="h-3 w-3" /> K
-          </kbd>
+          {loading && <Loader2 className="h-4 w-4 text-white/60 animate-spin" />}
           <button
             data-testid="hero-ai-search-submit"
             onClick={() => submit()}
-            className="btn-primary h-10 px-4 sm:px-5 text-sm"
+            className="btn-primary px-4 sm:px-5 py-2 text-sm"
           >
-            <span>Discover</span>
+            <span className="hidden sm:inline">Discover</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
+      </div>
 
-        {/* Suggestion chips */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          <span className="label-eyebrow self-center mr-1">Try</span>
-          {prompts.slice(0, 6).map((p) => (
+      {/* Suggestion chips */}
+      {showChips && prompts.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-1.5 px-1">
+          <span className="label-eyebrow self-center mr-1 text-[10px]">Try</span>
+          {prompts.slice(0, 5).map((p) => (
             <button
               key={p}
               data-testid="hero-ai-search-suggestion-chip"
-              onClick={() => onChip(p)}
-              className="glass-pill text-xs"
+              onClick={() => submit(p)}
+              className="pill pill-sm"
             >
               {p}
             </button>
           ))}
         </div>
+      )}
 
-        {/* Category pills */}
-        {size === "hero" && (
-          <div className="mt-3 flex flex-wrap gap-2">
-            <span className="label-eyebrow self-center mr-1">Categories</span>
-            {CATEGORY_ORDER.slice(0, 7).map((c) => (
-              <button
-                key={c}
-                data-testid="hero-ai-search-category-pill"
-                onClick={() => navigate(`/tools?category=${c}`)}
-                className="glass-pill text-[11px] uppercase tracking-[0.18em]"
-              >
-                {formatCategory(c)}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Inline preview */}
-        {showPreview && (
-          <div className="mt-5">
-            <div className="hairline mb-4" />
-            {loading && (
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <Loader2 className="h-4 w-4 animate-spin" /> Querying the AI operating system…
-              </div>
-            )}
-            {preview && !loading && (
-              <div data-testid="hero-ai-search-preview">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                  <p className="text-white/70 text-sm">
-                    <span className="label-eyebrow mr-2">Intent</span>
-                    {preview.intent}
-                  </p>
-                  <button onClick={() => submit(preview.query)} className="btn-ghost text-xs h-8 px-3">
-                    View full results <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {preview.tools.slice(0, 3).map((t, i) => (
-                    <ToolCard
-                      key={t.id}
-                      tool={t}
-                      reason={preview.recommendations[i]?.why}
-                      compact
-                      data-testid="hero-ai-search-result-item"
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      {/* Categories row */}
+      {showCategories && (
+        <div className="mt-2 flex flex-wrap gap-1.5 px-1">
+          <span className="label-eyebrow self-center mr-1 text-[10px]">Categories</span>
+          {CATEGORY_ORDER.slice(0, 6).map((c) => (
+            <button
+              key={c}
+              data-testid="hero-ai-search-category-pill"
+              onClick={() => navigate(`/tools?category=${c}`)}
+              className="pill pill-sm"
+            >
+              {formatCategory(c)}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

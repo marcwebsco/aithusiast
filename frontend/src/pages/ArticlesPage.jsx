@@ -19,30 +19,30 @@ export default function ArticlesPage() {
   const filtered = category ? articles.filter((a) => a.category === category) : articles;
 
   return (
-    <div className="container-wide py-12 lg:py-16">
-      <p className="label-eyebrow mb-3">Editorial</p>
-      <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-4">
+    <div className="container-wide py-10 lg:py-14">
+      <p className="label-eyebrow mb-2">Editorial</p>
+      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3">
         Short, premium, useful.
       </h1>
-      <p className="text-white/60 text-base font-light max-w-2xl">
-        AI editorial worth your scroll. Visual, opinionated, and refreshingly brief.
+      <p className="text-white/55 text-[14px] max-w-2xl">
+        Quick AI insights, comparisons and workflows — designed to help you pick the right tool faster.
       </p>
 
-      <div className="mt-10">
+      <div className="mt-8">
         <CategoryPills value={category} onChange={setCategory} dataTestid="articles-category-pill" />
       </div>
 
-      <div className="mt-10">
+      <div className="mt-8">
         {loading ? (
-          <div className="flex items-center gap-2 text-white/60">
-            <Loader2 className="h-4 w-4 animate-spin" /> Loading…
+          <div className="flex items-center gap-2 text-white/60 text-[13px]">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading…
           </div>
         ) : filtered.length === 0 ? (
-          <p className="text-white/60">No articles in this category.</p>
+          <p className="text-white/60 text-[14px]">No articles in this category.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             {filtered.map((a) => (
-              <ArticleCard key={a.id} article={a} />
+              <ArticleCard key={a.id} article={a} compact />
             ))}
           </div>
         )}

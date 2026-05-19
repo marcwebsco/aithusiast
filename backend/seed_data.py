@@ -18,6 +18,7 @@ TOOLS_SEED = [
         "url": "https://chatgpt.com", "logo": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
         "accent": "#10A37F", "trending": True, "featured": True,
+        "rank": 1, "weekly_growth": "+8%", "popularity": 98,
     },
     {
         "id": "claude", "name": "Claude", "tagline": "Anthropic's nuanced, long-context AI.",
@@ -28,6 +29,7 @@ TOOLS_SEED = [
         "url": "https://claude.ai", "logo": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
         "accent": "#D97757", "trending": True, "featured": True,
+        "rank": 2, "weekly_growth": "+22%", "popularity": 94,
     },
     {
         "id": "gemini", "name": "Gemini", "tagline": "Google's multimodal AI.",
@@ -38,6 +40,7 @@ TOOLS_SEED = [
         "url": "https://gemini.google.com", "logo": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80",
         "accent": "#4285F4", "trending": True, "featured": False,
+        "rank": 3, "weekly_growth": "+31%", "popularity": 91,
     },
     {
         "id": "grok", "name": "Grok", "tagline": "xAI's witty real-time assistant.",
@@ -90,6 +93,7 @@ TOOLS_SEED = [
         "url": "https://midjourney.com", "logo": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80",
         "accent": "#A855F7", "trending": True, "featured": True,
+        "rank": 5, "weekly_growth": "+12%", "popularity": 88,
     },
     {
         "id": "dalle3", "name": "DALL·E 3", "tagline": "OpenAI's image powerhouse.",
@@ -110,6 +114,7 @@ TOOLS_SEED = [
         "url": "https://blackforestlabs.ai", "logo": "https://images.unsplash.com/photo-1626544827763-d516dce335e2?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1626544827763-d516dce335e2?w=800&q=80",
         "accent": "#000000", "trending": True,
+        "rank": 9, "weekly_growth": "+44%", "popularity": 78,
     },
     {
         "id": "sdxl", "name": "Stable Diffusion XL", "tagline": "The open-source classic.",
@@ -172,6 +177,7 @@ TOOLS_SEED = [
         "url": "https://runwayml.com", "logo": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
         "accent": "#FFFFFF", "trending": True, "featured": True,
+        "rank": 7, "weekly_growth": "+18%", "popularity": 85,
     },
     {
         "id": "sora", "name": "Sora", "tagline": "OpenAI's text-to-video.",
@@ -182,6 +188,7 @@ TOOLS_SEED = [
         "url": "https://openai.com/sora", "logo": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80",
         "accent": "#10A37F", "trending": True,
+        "rank": 8, "weekly_growth": "+52%", "popularity": 82,
     },
     {
         "id": "kling", "name": "Kling", "tagline": "Stunning open video frontier.",
@@ -234,6 +241,7 @@ TOOLS_SEED = [
         "url": "https://github.com/features/copilot", "logo": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&q=80",
         "accent": "#FFFFFF", "trending": True, "featured": True,
+        "rank": 6, "weekly_growth": "+15%", "popularity": 87,
     },
     {
         "id": "cursor", "name": "Cursor", "tagline": "AI-first code editor.",
@@ -244,6 +252,7 @@ TOOLS_SEED = [
         "url": "https://cursor.com", "logo": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
         "accent": "#000000", "trending": True, "featured": True,
+        "rank": 4, "weekly_growth": "+38%", "popularity": 90,
     },
     {
         "id": "windsurf", "name": "Windsurf", "tagline": "Agentic IDE by Codeium.",
@@ -420,6 +429,7 @@ TOOLS_SEED = [
         "url": "https://perplexity.ai", "logo": "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=200&q=80",
         "cover": "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=800&q=80",
         "accent": "#20B2AA", "trending": True, "featured": True,
+        "rank": 10, "weekly_growth": "+26%", "popularity": 76,
     },
     {
         "id": "elicit", "name": "Elicit", "tagline": "Literature review automated.",

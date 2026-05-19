@@ -46,37 +46,36 @@ export default function SearchPage() {
   }, [q]);
 
   return (
-    <div className="container-wide py-12 lg:py-16">
-      <p className="label-eyebrow mb-3">AI Recommendation</p>
-      <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-4">
-        {q ? <>Results for <span className="text-[#A855F7] glow-text">“{q}”</span></> : "Search the AI universe"}
+    <div className="container-wide py-10 lg:py-14">
+      <p className="label-eyebrow mb-2">AI recommendation</p>
+      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3 leading-[1.1]">
+        {q ? <>Results for <span className="text-[#A855F7]">“{q}”</span></> : "Search the AI universe"}
       </h1>
-      <p className="text-white/60 text-base font-light max-w-2xl">
-        Ask anything. The AIthusiast engine reads your intent, scans the curated catalog and ranks the best fits with reasoning.
+      <p className="text-white/55 text-[14px] max-w-2xl">
+        Ask anything. AIthusiast reads your intent, scans the curated catalog and ranks the best fits with reasoning.
       </p>
 
-      <div className="mt-10">
-        <HeroSearch size="compact" />
+      <div className="mt-8">
+        <HeroSearch size="compact" showChips={false} />
       </div>
 
-      {/* Results */}
-      <div className="mt-12">
+      <div className="mt-10">
         {loading && (
-          <div className="flex items-center gap-2 text-white/70">
-            <Loader2 className="h-4 w-4 animate-spin" /> Thinking… querying the AI operating system.
+          <div className="flex items-center gap-2 text-white/65 text-[13px]">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Thinking… querying the AI operating system.
           </div>
         )}
         {error && <p className="text-red-400/80">{error}</p>}
         {!q && !loading && (
           <div>
-            <p className="label-eyebrow mb-4">Try one of these</p>
-            <div className="flex flex-wrap gap-2">
+            <p className="label-eyebrow mb-3">Try one of these</p>
+            <div className="flex flex-wrap gap-1.5">
               {suggestions.map((p) => (
                 <button
                   key={p}
                   data-testid="search-suggestion-pill"
                   onClick={() => navigate(`/search?q=${encodeURIComponent(p)}`)}
-                  className="glass-pill text-sm"
+                  className="pill pill-sm"
                 >
                   {p}
                 </button>
@@ -88,23 +87,20 @@ export default function SearchPage() {
           <>
             <div
               data-testid="search-results-reasoning"
-              className="relative overflow-hidden rounded-[36px] border border-white/[0.10] bg-white/[0.04] backdrop-blur-xl p-6 lg:p-8 mb-8"
-              style={{ boxShadow: "var(--shadow-elev)" }}
+              className="surface-card rounded-2xl p-5 lg:p-6 mb-6"
             >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl opacity-40"
-                style={{ background: "radial-gradient(closest-side, rgba(168,85,247,0.45), transparent 70%)" }}
-              />
-              <div className="relative flex items-start gap-3">
-                <div className="h-9 w-9 rounded-2xl border border-white/15 bg-white/[0.06] flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 text-[#A855F7]" />
+              <div className="flex items-start gap-3">
+                <div
+                  className="h-8 w-8 rounded-lg border border-white/10 flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(168, 85, 247, 0.10)" }}
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-[#A855F7]" />
                 </div>
                 <div className="flex-1">
-                  <p className="label-eyebrow mb-1">
+                  <p className="label-eyebrow mb-1 text-[10px]">
                     AI intent · {data.source === "llm" ? "Reasoned by Gemini" : "Keyword fallback"}
                   </p>
-                  <p className="text-white/85 text-base sm:text-lg leading-relaxed font-light">{data.intent}</p>
+                  <p className="text-white/85 text-[15px] leading-relaxed">{data.intent}</p>
                   {data.filters?.length > 0 && (
                     <div className="mt-3 flex flex-wrap gap-1.5">
                       {data.filters.map((f) => (
@@ -116,7 +112,7 @@ export default function SearchPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
               {data.tools.map((t, i) => (
                 <ToolCard
                   key={t.id}
@@ -128,7 +124,7 @@ export default function SearchPage() {
               ))}
             </div>
             {data.tools.length === 0 && (
-              <p className="text-white/60">No results. Try a different query.</p>
+              <p className="text-white/60 text-[14px]">No results. Try a different query.</p>
             )}
           </>
         )}
