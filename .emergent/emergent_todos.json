@@ -13,22 +13,22 @@
   },
   {
     "content": "Phase 2: Design agent - get premium futuristic design guidelines",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Build backend - models, seed 50-80 tools + 10-12 articles, API endpoints",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Build frontend - homepage, search, tool/article pages with futuristic UI",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: All user stories adhered to in development",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: End-to-end testing using testing_agent_v3",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
