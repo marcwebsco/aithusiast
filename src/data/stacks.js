@@ -1,0 +1,103 @@
+/**
+ * AIthusiast Stacks Data — Local Frontend Version
+ * 12 curated AI stacks for different personas
+ */
+
+export const STACKS = [
+  {
+    id: "stk-students", slug: "best-ai-stack-for-students",
+    title: "Best AI stack for students",
+    persona: "Students", use_case: "Research, writing, slides, study notes",
+    cover: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80",
+    tool_ids: ["chatgpt", "perplexity", "notion-ai", "gamma", "claude"],
+    rationale: "Capture lectures, research with citations, draft essays, present beautifully. Five tools, zero overlap.",
+  },
+  {
+    id: "stk-creators", slug: "best-ai-stack-for-creators",
+    title: "Best AI stack for creators",
+    persona: "Creators", use_case: "Visuals, video, voice, publishing",
+    cover: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=80",
+    tool_ids: ["midjourney", "runway", "elevenlabs", "krea", "suno"],
+    rationale: "Concept, shoot, edit and score — a complete creative pipeline.",
+  },
+  {
+    id: "stk-founders", slug: "best-ai-stack-for-founders",
+    title: "Best AI stack for founders",
+    persona: "Founders", use_case: "Build, ship, market and automate",
+    cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80",
+    tool_ids: ["v0", "cursor", "zapier-ai", "gamma", "perplexity"],
+    rationale: "Prototype products, automate ops, research markets, pitch the round.",
+  },
+  {
+    id: "stk-designers", slug: "best-ai-stack-for-designers",
+    title: "Best AI stack for designers",
+    persona: "Designers", use_case: "Concepting, UI, brand & visuals",
+    cover: "https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1200&q=80",
+    tool_ids: ["figma-ai", "v0", "galileo", "midjourney", "magnific"],
+    rationale: "Generate UI, refine in Figma, polish to print quality — taste-first workflow.",
+  },
+  {
+    id: "stk-researchers", slug: "best-ai-stack-for-researchers",
+    title: "Best AI stack for researchers",
+    persona: "Researchers", use_case: "Literature, synthesis, writing",
+    cover: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=1200&q=80",
+    tool_ids: ["perplexity", "elicit", "consensus", "claude", "notion-ai"],
+    rationale: "From discovery to draft — peer-reviewed evidence at every step.",
+  },
+  {
+    id: "stk-developers", slug: "best-ai-stack-for-developers",
+    title: "Best AI stack for developers",
+    persona: "Developers", use_case: "Ship code, faster",
+    cover: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
+    tool_ids: ["cursor", "github-copilot", "v0", "claude", "bolt"],
+    rationale: "Pair-programming, UI generation, code review, and rapid prototyping in one stack.",
+  },
+  {
+    id: "stk-marketers", slug: "best-ai-stack-for-marketers",
+    title: "Best AI stack for marketers",
+    persona: "Marketers", use_case: "Content, campaigns, automation",
+    cover: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80",
+    tool_ids: ["chatgpt", "ideogram", "heygen", "zapier-ai", "perplexity"],
+    rationale: "Write copy, generate creatives, ship video ads, automate funnels.",
+  },
+  {
+    id: "stk-agencies", slug: "best-ai-stack-for-agencies",
+    title: "Best AI stack for agencies",
+    persona: "Agencies", use_case: "Concept, deliver, scale across clients",
+    cover: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&q=80",
+    tool_ids: ["midjourney", "runway", "v0", "gamma", "make"],
+    rationale: "Win the pitch, deliver the work, multiply margins with automation.",
+  },
+  {
+    id: "stk-podcasters", slug: "best-ai-stack-for-podcasters",
+    title: "Best AI stack for podcasters",
+    persona: "Podcasters", use_case: "Record, edit, publish, repurpose",
+    cover: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1200&q=80",
+    tool_ids: ["descript", "elevenlabs", "otter", "chatgpt", "heygen"],
+    rationale: "Clean audio, generate ad reads, transcribe everything, repurpose to video.",
+  },
+  {
+    id: "stk-ecommerce", slug: "best-ai-stack-for-ecommerce",
+    title: "Best AI stack for ecommerce",
+    persona: "Ecommerce", use_case: "Product photos, copy, ads, support",
+    cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80",
+    tool_ids: ["photoroom", "ideogram", "chatgpt", "heygen", "zapier-ai"],
+    rationale: "Photos that sell, copy that converts, ads that scale, support that never sleeps.",
+  },
+  {
+    id: "stk-educators", slug: "best-ai-stack-for-educators",
+    title: "Best AI stack for educators",
+    persona: "Educators", use_case: "Lessons, materials, grading",
+    cover: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80",
+    tool_ids: ["claude", "notion-ai", "gamma", "elevenlabs", "perplexity"],
+    rationale: "Build curricula, generate handouts, narrate lessons, research deeper.",
+  },
+  {
+    id: "stk-product-managers", slug: "best-ai-stack-for-product-managers",
+    title: "Best AI stack for product managers",
+    persona: "Product Managers", use_case: "Specs, research, prototypes",
+    cover: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80",
+    tool_ids: ["claude", "perplexity", "v0", "notion-ai", "fireflies"],
+    rationale: "Draft PRDs, research markets, prototype UIs, never miss a meeting.",
+  },
+];
