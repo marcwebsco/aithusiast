@@ -29,11 +29,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger("aithusiast")
 
-# ── DB ──
-mongo_url = os.environ["MONGO_URL"]
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ["DB_NAME"]]
-
 # ── LLM ──
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY")
 if not EMERGENT_LLM_KEY:
